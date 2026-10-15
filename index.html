@@ -1,259 +1,32 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>مصنع الفارس للمراتب والإسفنج</title>
-<meta name="description" content="مصنع الفارس للمراتب والإسفنج — أجا، الدقهلية. ابعت رسالة واتساب، اتصل بنا، أو افتح الموقع على الخريطة.">
-<meta name="theme-color" content="#0a2166">
+<meta name="description" content="مصنع الفارس للمراتب والإسفنج — أجا، الدقهلية. مراتب ومستلزمات وصيانة وتجديد.">
+<meta name="theme-color" content="#00004d">
 <meta property="og:title" content="مصنع الفارس للمراتب والإسفنج">
-<meta property="og:description" content="واتساب · اتصال · الموقع على الخريطة · الكتالوج">
+<meta property="og:description" content="مراتب ومستلزمات وصيانة وتجديد — أجا، الدقهلية">
 <meta property="og:image" content="preview.png">
 <link rel="icon" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Reem+Kufi:wght@500;600&display=swap" rel="stylesheet">
-
 <style>
-  :root{
-    --blue-1:#11118d; --blue-2:#000061; --blue-3:#00004d; --blue-4:#00002f;
-    --cyan:#55e8ff;
-    --glass:rgba(255,255,255,.09); --glass-line:rgba(255,255,255,.22);
-    --text:#fff; --muted:rgba(255,255,255,.74);
-  }
-  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-  html{background:var(--blue-4)}
-  body{
-    min-height:100vh;
-    font-family:"IBM Plex Sans Arabic",system-ui,sans-serif;
-    color:var(--text);
-    background:radial-gradient(90% 55% at 50% 12%, var(--blue-1), var(--blue-2) 55%, var(--blue-3) 85%, var(--blue-4));
-    background-attachment:fixed;background-image:radial-gradient(ellipse at 20% 10%,rgba(50,60,210,.16),transparent 42%),radial-gradient(ellipse at 80% 70%,rgba(20,30,160,.12),transparent 45%),radial-gradient(90% 55% at 50% 12%,var(--blue-1),var(--blue-2) 55%,var(--blue-3) 85%,var(--blue-4));
-    padding:max(14px,env(safe-area-inset-top)) clamp(14px,4vw,28px) max(18px,env(safe-area-inset-bottom));
-    display:flex;justify-content:center;
-  }
-  main{width:100%;max-width:420px}
-  @media (min-width:640px){ main{max-width:600px} body{padding-top:max(28px,env(safe-area-inset-top))} }
-  @media (min-width:1024px){ main{max-width:720px} }
-
-  /* ---------- الشعار + اللمعة ---------- */
-  .brand{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:14px}
-  .logo{
-    position:relative;width:clamp(84px,19vw,108px);
-    filter:drop-shadow(0 8px 20px rgba(0,0,0,.35));
-    animation:rise .8s cubic-bezier(.2,.7,.2,1) both;
-  }
-  .logo img{width:100%;height:auto;display:block}
-  .logo::after{
-    content:"";position:absolute;inset:0;
-    background:linear-gradient(105deg,transparent 40%,rgba(120,232,255,.95) 50%,transparent 60%);
-    background-size:300% 100%;background-position:0% 0;
-    -webkit-mask:url("logo.png") center/100% 100% no-repeat;
-            mask:url("logo.png") center/100% 100% no-repeat;
-    animation:sheen 1.7s .7s ease-out 1 both;
-  }
-  .tagline{margin-top:8px;font-family:"Reem Kufi",sans-serif;font-weight:500;font-size:1.05rem;color:rgba(255,255,255,.92)}
-
-  /* ---------- الأزرار (صغيرة) ---------- */
-  .actions{display:flex;flex-direction:column;gap:8px}
-  .top{display:flex;gap:8px}
-  .more{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:8px}
-
-  .act{
-    display:flex;align-items:center;gap:10px;
-    padding:7px 12px;min-height:52px;border-radius:14px;
-    text-decoration:none;color:var(--text);
-    transition:transform .15s ease, filter .2s ease, background .2s ease;
-  }
-  .act:active{transform:scale(.98)}
-  .act .ico{width:36px;height:36px;flex:none;display:grid;place-items:center}
-  .act .ico svg{width:100%;height:100%;display:block}
-  .act .tx{flex:1;min-width:0}
-  .act .tx b{display:block;font-weight:700;font-size:.98rem;line-height:1.3}
-  .act .tx span{display:block;font-size:.8rem;margin-top:1px;opacity:.88;line-height:1.35}
-  .act .go{width:16px;height:16px;flex:none;opacity:.65}
-
-  .act.wa{
-    flex:1;min-width:0;color:#04230f;
-    background:linear-gradient(180deg,#43e97b,#25D366 60%,#1aa84f);
-    box-shadow:0 8px 20px -10px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.4);
-  }
-  /* زرار الاتصال الصغير */
-  .callbtn{
-    flex:none;width:clamp(80px,21vw,100px);
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;
-    padding:6px 4px;border-radius:14px;background:#fff;color:#00004d;text-decoration:none;
-    box-shadow:0 8px 20px -10px rgba(0,0,0,.5);
-    transition:transform .15s ease, filter .2s ease;
-  }
-  .callbtn svg{width:16px;height:16px}
-  .callbtn b{font-size:.88rem;font-weight:700;line-height:1.2}
-  .callbtn small{font-size:.68rem;font-weight:500;opacity:.8}
-  .callbtn:active{transform:scale(.97)}
-
-  .act.map,.act.plain{
-    background:var(--glass);border:1px solid var(--glass-line);
-    backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
-  }
-  .act.plain .ico{border:1px solid var(--cyan);border-radius:10px;color:var(--cyan);padding:8px}
-  .act.map .tx span,.act.plain .tx span{color:var(--muted);opacity:1}
-  @media (hover:hover){
-    .act:hover,.callbtn:hover{filter:brightness(1.06)}
-    .act.map:hover,.act.plain:hover{background:rgba(255,255,255,.15);filter:none}
-  }
-
-  /* ---------- السوشيال (تحت الخريطة) ---------- */
-  .social{margin-top:12px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
-  .soc{
-    display:flex;align-items:center;justify-content:center;gap:8px;padding:7px 10px;border-radius:12px;
-    background:var(--glass);border:1px solid var(--glass-line);color:#fff;text-decoration:none;
-    font-weight:600;font-size:.92rem;transition:background .2s,transform .15s;
-  }
-  .soc .ico{width:26px;height:26px;flex:none}
-  .soc .ico svg{width:100%;height:100%;display:block}
-  .soc:active{transform:scale(.97)}
-  @media (hover:hover){.soc:hover{background:rgba(255,255,255,.16)}}
-  @media (max-width:639px){ .grid .soc:last-child:nth-child(odd){grid-column:1/-1} }
-
-  /* ---------- الخدمات (تحت خالص) ---------- */
-  .about{
-    margin-top:12px;padding:12px 14px 10px;border-radius:14px;
-    background:rgba(0,0,47,.48);border:1px solid var(--glass-line);
-  }
-  .about h2{font-family:"Reem Kufi",sans-serif;font-weight:500;font-size:1rem;color:var(--cyan);margin-bottom:6px}
-  .about ul{list-style:none;display:grid;gap:5px}
-  @media (min-width:760px){ .about ul{grid-template-columns:repeat(3,1fr);gap:14px} }
-  .about li{position:relative;padding-inline-start:15px;line-height:1.5;font-size:.9rem}
-  .about li::before{content:"";position:absolute;inset-inline-start:0;top:.6em;width:6px;height:6px;border-radius:50%;background:var(--cyan)}
-  .about small{color:var(--muted);font-size:.82rem;margin-inline-start:4px}
-  .mgr{margin-top:8px;padding-top:8px;border-top:1px solid var(--glass-line);color:var(--muted);font-size:.85rem;text-align:center}
-  .mgr b{color:#fff;font-weight:600}
-
-  footer{margin-top:12px;text-align:center;color:var(--muted);font-size:.74rem}
-  a:focus-visible{outline:2px solid #fff;outline-offset:3px}
-  svg.line{fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-
-  @keyframes rise{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:none}}
-  @keyframes sheen{from{background-position:0% 0}to{background-position:100% 0}}
-  @media (prefers-reduced-motion:reduce){.logo{animation:none}.logo::after{display:none}*{transition:none!important}}
+:root{--navy:#00002f;--deep:#00004d;--blue:#080878;--cyan:#54e8ff;--white:#fff;--muted:#cbd2f2;--line:rgba(255,255,255,.18);--panel:rgba(255,255,255,.075)}
+*{box-sizing:border-box;margin:0;padding:0}html{background:var(--navy)}body{min-height:100vh;color:var(--white);font-family:"IBM Plex Sans Arabic",Arial,sans-serif;background:radial-gradient(70% 45% at 50% 0,#16169a 0,var(--blue) 38%,var(--deep) 72%,var(--navy) 100%);padding:20px 16px 28px;overflow-x:hidden}body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.23;background:linear-gradient(135deg,transparent 20%,rgba(84,232,255,.08) 21%,transparent 22%,transparent 58%,rgba(255,255,255,.04) 59%,transparent 60%);background-size:280px 280px}main{width:min(100%,760px);margin:auto;position:relative}.topbar{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:.78rem;margin-bottom:18px}.status{display:inline-flex;align-items:center;gap:7px}.status:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan)}.hero{position:relative;text-align:center;padding:28px 18px 25px;border:1px solid var(--line);border-radius:28px;background:linear-gradient(145deg,rgba(255,255,255,.13),rgba(255,255,255,.035));box-shadow:0 22px 55px rgba(0,0,0,.28);overflow:hidden}.hero:after{content:"";position:absolute;width:250px;height:250px;border:1px solid rgba(84,232,255,.17);border-radius:50%;left:-95px;bottom:-155px;box-shadow:0 0 0 22px rgba(84,232,255,.03),0 0 0 46px rgba(84,232,255,.025)}.logo{position:relative;width:132px;margin:auto;z-index:1;filter:drop-shadow(0 11px 18px rgba(0,0,0,.4))}.logo img{width:100%;height:auto;display:block}.hero h1{font-family:"Reem Kufi",sans-serif;font-size:clamp(1.35rem,4vw,1.9rem);font-weight:500;margin-top:13px;line-height:1.45;position:relative;z-index:1}.hero p{color:var(--muted);font-size:.9rem;margin-top:5px;position:relative;z-index:1}.cyan-rule{height:2px;width:82px;background:var(--cyan);margin:13px auto 0;box-shadow:0 0 14px rgba(84,232,255,.5)}.section-title{display:flex;align-items:center;gap:10px;margin:24px 3px 10px;font-family:"Reem Kufi",sans-serif;font-size:1.05rem}.section-title:after{content:"";height:1px;background:var(--line);flex:1}.actions{display:grid;grid-template-columns:1.35fr .65fr;gap:10px}.action{min-height:72px;display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--white);border:1px solid var(--line);border-radius:17px;padding:12px 14px;background:var(--panel);transition:.2s}.action:hover{transform:translateY(-2px);border-color:rgba(84,232,255,.65);background:rgba(255,255,255,.12)}.action.primary{background:linear-gradient(135deg,#42e879,#20b957);border-color:rgba(255,255,255,.3);color:#001f11}.action.primary:hover{filter:brightness(1.06)}.action .icon{width:40px;height:40px;display:grid;place-items:center;flex:none;border-radius:13px;background:rgba(255,255,255,.15);font-size:1.35rem}.action.primary .icon{background:rgba(255,255,255,.3)}.action b{display:block;font-size:.98rem}.action small{display:block;margin-top:2px;opacity:.78;font-size:.75rem}.action .arrow{margin-right:auto;font-size:1.2rem;opacity:.6}.features{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.feature{min-height:105px;padding:13px 9px;text-align:center;border:1px solid var(--line);border-radius:16px;background:rgba(0,0,47,.42)}.feature strong{display:block;color:var(--cyan);font-size:.91rem;margin-bottom:5px}.feature span{display:block;color:var(--muted);font-size:.73rem;line-height:1.55}.services{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.service{padding:15px 10px;border-radius:16px;border:1px solid rgba(84,232,255,.2);background:linear-gradient(145deg,rgba(8,8,120,.65),rgba(0,0,47,.72))}.service .mark{color:var(--cyan);font-size:1.25rem}.service h3{font-size:.88rem;margin-top:8px}.service p{color:var(--muted);font-size:.72rem;line-height:1.5;margin-top:4px}.links{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.link{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border-radius:13px;border:1px solid var(--line);background:var(--panel);color:var(--white);text-decoration:none;font-size:.86rem}.link:hover{border-color:var(--cyan)}.address{margin-top:9px;text-align:center;color:var(--muted);font-size:.78rem;padding:11px;border-bottom:1px solid var(--line)}footer{text-align:center;color:rgba(255,255,255,.58);font-size:.72rem;margin-top:19px}@media(max-width:520px){.actions{grid-template-columns:1fr}.features,.services{grid-template-columns:repeat(3,1fr)}.feature{min-height:112px}.services{gap:7px}.service{padding:13px 7px}.service h3{font-size:.8rem}}@media(max-width:360px){.features,.services{grid-template-columns:1fr}.feature{min-height:auto}.links{grid-template-columns:1fr}}
 </style>
 </head>
-
 <body>
 <main>
-  <header class="brand">
-    <div class="logo"><img src="logo.png" alt="شعار مصنع الفارس للمراتب" width="701" height="952"></div>
-    <p class="tagline">للمراتب والإسفنج</p>
-  </header>
-
-  <nav class="actions" id="actions" aria-label="طرق التواصل"></nav>
-
-  <section class="social" id="social" hidden>
-    <div class="grid" id="grid"></div>
-  </section>
-
-  <section class="about" id="about">
-    <h2>خدماتنا</h2>
-    <ul>
-      <li>مراتب <small>طبي · سوست · سوفت</small></li>
-      <li>مستلزمات المراتب <small>كثرات · مخدات</small></li>
-      <li>قسم صيانة متخصص <small>لتجديد وإصلاح المراتب</small></li>
-    </ul>
-    <p class="mgr">إدارة: <b>م/ فارس محمد رشاد</b></p>
-  </section>
-
-  <footer>© مصنع الفارس للمراتب</footer>
+<div class="topbar"><span>مصنع الفارس للمراتب والإسفنج</span><span class="status">متاح للتواصل</span></div>
+<header class="hero"><div class="logo"><img src="logo.png" alt="شعار مصنع الفارس للمراتب" width="701" height="952"></div><h1>مصنع الفارس للمراتب</h1><p>مراتب · إسفنج · مستلزمات · صيانة وتجديد</p><div class="cyan-rule"></div></header>
+<h2 class="section-title">تواصل معنا</h2>
+<section class="actions" aria-label="طرق التواصل"><a class="action primary" href="https://wa.me/201023010934?text=%D8%A3%D9%87%D9%84%D8%A7%D9%8B%D8%8C%20%D8%B9%D8%A7%D9%8A%D8%B2%20%D8%A3%D8%B3%D8%AA%D9%81%D8%B3%D8%B1%20%D8%B9%D9%86%20%D8%A7%D9%84%D9%85%D8%B1%D8%A7%D8%AA%D8%A8" target="_blank" rel="noopener"><span class="icon">◔</span><span><b>ابعت رسالة واتساب</b><small>افتح محادثة مباشرة</small></span><span class="arrow">‹</span></a><a class="action" href="tel:01023010934"><span class="icon">☎</span><span><b>اتصل بنا</b><small dir="ltr">01023010934</small></span></a><a class="action" href="https://maps.app.goo.gl/iRzP2VJxwceXJ5P1A" target="_blank" rel="noopener"><span class="icon">⌖</span><span><b>موقع المصنع</b><small>برج النور - أجا - الدقهلية</small></span><span class="arrow">‹</span></a><a class="action" href="catalog/" target="_blank" rel="noopener"><span class="icon">▤</span><span><b>شوف الكتالوج</b><small>الموديلات والمقاسات</small></span><span class="arrow">‹</span></a></section>
+<h2 class="section-title">ما يميز خدماتنا</h2><section class="features"><div class="feature"><strong>خامات مختارة</strong><span>اهتمام بالتفاصيل وجودة الخامات</span></div><div class="feature"><strong>مقاسات متنوعة</strong><span>مراتب تناسب احتياجك ومساحتك</span></div><div class="feature"><strong>صيانة وتجديد</strong><span>قسم متخصص لإصلاح المراتب</span></div></section>
+<h2 class="section-title">خدماتنا</h2><section class="services"><article class="service"><span class="mark">▰</span><h3>مراتب</h3><p>طبي · سوست · سوفت</p></article><article class="service"><span class="mark">◇</span><h3>مستلزمات المراتب</h3><p>كفرات · مخدات</p></article><article class="service"><span class="mark">↻</span><h3>صيانة متخصصة</h3><p>تجديد وإصلاح المراتب</p></article></section>
+<h2 class="section-title">تابعنا</h2><section class="links"><a class="link" href="https://www.facebook.com/share/14tobeDaMKo/" target="_blank" rel="noopener">● فيسبوك</a><a class="link" href="https://www.instagram.com/al_faris_216" target="_blank" rel="noopener">◎ انستجرام</a></section><div class="address">إدارة: <strong>م/ فارس محمد رشاد</strong></div><footer>© مصنع الفارس للمراتب</footer>
 </main>
-
-<script>
-/* =====================================================
-   ✏️ عدّل البيانات هنا بس — وسيب الباقي زي ما هو
-   أي حقل تسيبه فاضي ("") الزرار بتاعه بيختفي لوحده
-   ===================================================== */
-const SITE = {
-  whatsapp: "201023010934",          // دولي من غير + (للواتساب بس)
-  whatsappMessage: "أهلاً، عايز أستفسر عن المراتب",
-  phone:    "01023010934",
-
-  telegram: "",                      // اليوزر من غير @
-  catalog:  "catalog/",
-
-  mapUrl:   "https://maps.app.goo.gl/iRzP2VJxwceXJ5P1A",
-  addressText: "برج النور - أجا - الدقهلية",
-
-  facebook:  "https://www.facebook.com/share/14tobeDaMKo/",
-  instagram: "https://www.instagram.com/al_faris_216",
-  tiktok:    "",
-  youtube:   ""
-};
-
-/* ---------- الأيقونات (شعارات رسمية: Simple Icons + Font Awesome) ---------- */
-const B = {
-  wa: `<svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#25D366"/><g transform="translate(3.6 3.6) scale(.7)"><path fill="#fff" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52s.198-.298.298-.497c.099-.198.05-.371-.025-.52s-.669-1.612-.916-2.207c-.242-.579-.487-.5-.669-.51a13 13 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074s2.096 3.2 5.077 4.487c.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413s.248-1.289.173-1.413c-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.82 11.82 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.9 11.9 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.82 11.82 0 0 0-3.48-8.413"/></g></svg>`,
-  map: `<svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#fff"/><g transform="translate(2.9 2.2) scale(.76)"><path d="M19.527 4.799c1.212 2.608.937 5.678-.405 8.173-1.101 2.047-2.744 3.74-4.098 5.614-.619.858-1.244 1.75-1.669 2.727-.141.325-.263.658-.383.992-.121.333-.224.673-.34 1.008-.109.314-.236.684-.627.687h-.007c-.466-.001-.579-.53-.695-.887-.284-.874-.581-1.713-1.019-2.525-.51-.944-1.145-1.817-1.79-2.671z" fill="#FBBC04"/><path d="M8.545 7.705l-3.959 4.707c.724 1.54 1.821 2.863 2.871 4.18q.371.465.737.936l4.984-5.925-.029.01c-1.741.601-3.691-.291-4.392-1.987a3.4 3.4 0 0 1-.209-.716c-.063-.437-.077-.761-.004-1.198z" fill="#34A853"/><path d="M5.492 3.149l-.003.004c-1.947 2.466-2.281 5.88-1.117 8.77l4.785-5.689-.058-.05z" fill="#4285F4"/><path d="M14.661.436l-3.838 4.563.027-.01c1.6-.551 3.403.15 4.22 1.626.176.319.323.683.377 1.045.068.446.085.773.012 1.22l-.003.016 3.836-4.561A8.38 8.38 0 0 0 14.67.439z" fill="#EA4335"/><path d="M9.466 5.868 14.162.285l-.047-.012A8.3 8.3 0 0 0 11.986 0a8.44 8.44 0 0 0-6.169 2.766l-.016.018z" fill="#1A73E8"/></g></svg>`,
-  tg: `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11.2" fill="#fff"/><path fill="#229ED9" d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm4.962 7.224c.1-.002.321.023.465.14a.5.5 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024q-.159.037-5.061 3.345-.72.495-1.302.48c-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789q.04-.324.893-.663 5.247-2.286 6.998-3.014c3.332-1.386 4.025-1.627 4.476-1.635"/></svg>`,
-  fb: `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11.2" fill="#fff"/><path fill="#1877F2" d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a9 9 0 0 1 1.141.195v3.325a9 9 0 0 0-.653-.036 27 27 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.7 1.7 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647"/></svg>`,
-  ig: `<svg viewBox="0 0 24 24" aria-hidden="true"><defs><radialGradient id="igg" cx=".3" cy="1.05" r="1.25"><stop offset="0" stop-color="#FED576"/><stop offset=".26" stop-color="#F47133"/><stop offset=".6" stop-color="#BC3081"/><stop offset="1" stop-color="#4C63D2"/></radialGradient></defs><rect width="24" height="24" rx="6" fill="url(#igg)"/><g transform="translate(3.9 3.9) scale(.675)"><path fill="#fff" d="M7.03.084c-1.277.06-2.149.264-2.91.563a5.9 5.9 0 0 0-2.124 1.388 5.9 5.9 0 0 0-1.38 2.127C.321 4.926.12 5.8.064 7.076s-.069 1.688-.063 4.947.021 3.667.083 4.947c.061 1.277.264 2.149.563 2.911.308.789.72 1.457 1.388 2.123a5.9 5.9 0 0 0 2.129 1.38c.763.295 1.636.496 2.913.552 1.278.056 1.689.069 4.947.063s3.668-.021 4.947-.082c1.28-.06 2.147-.265 2.91-.563a5.9 5.9 0 0 0 2.123-1.388 5.9 5.9 0 0 0 1.38-2.129c.295-.763.496-1.636.551-2.912.056-1.28.07-1.69.063-4.948-.006-3.258-.02-3.667-.081-4.947-.06-1.28-.264-2.148-.564-2.911a5.9 5.9 0 0 0-1.387-2.123 5.86 5.86 0 0 0-2.128-1.38C19.074.322 18.202.12 16.924.066 15.647.009 15.236-.006 11.977 0S8.31.021 7.03.084m.14 21.693c-1.17-.05-1.805-.245-2.228-.408a3.7 3.7 0 0 1-1.382-.895 3.7 3.7 0 0 1-.9-1.378c-.165-.423-.363-1.058-.417-2.228-.06-1.264-.072-1.644-.08-4.848-.006-3.204.006-3.583.061-4.848.05-1.169.246-1.805.408-2.228.216-.561.477-.96.895-1.382a3.7 3.7 0 0 1 1.379-.9c.423-.165 1.057-.361 2.227-.417 1.265-.06 1.644-.072 4.848-.08 3.203-.006 3.583.006 4.85.062 1.168.05 1.804.244 2.227.408.56.216.96.475 1.382.895s.681.817.9 1.378c.165.422.362 1.056.417 2.227.06 1.265.074 1.645.08 4.848.005 3.203-.006 3.583-.061 4.848-.051 1.17-.245 1.805-.408 2.23-.216.56-.477.96-.896 1.38a3.7 3.7 0 0 1-1.378.9c-.422.165-1.058.362-2.226.418-1.266.06-1.645.072-4.85.079s-3.582-.006-4.848-.06m9.783-16.192a1.44 1.44 0 1 0 1.437-1.442 1.44 1.44 0 0 0-1.437 1.442M5.839 12.012a6.161 6.161 0 1 0 12.323-.024 6.162 6.162 0 0 0-12.323.024M8 12.008A4 4 0 1 1 12.008 16 4 4 0 0 1 8 12.008"/></g></svg>`,
-  tt: `<svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#000"/><g transform="translate(4.4 4.4) scale(.63)"><path fill="#fff" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07"/></g></svg>`,
-  yt: `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M9.545 15.568V8.432L15.818 12z"/><path fill="#FF0000" d="M23.498 6.186a3.02 3.02 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.02 3.02 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.02 3.02 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.02 3.02 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"/></svg>`
-};
-const L = {
-  tel: `<svg viewBox="0 0 512 512" aria-hidden="true" fill="currentColor"><path d="M160.2 25c-7.9-18.9-28.5-28.9-48.1-23.6l-5.5 1.5C42 20.5-13.2 83.1 2.9 159.3 40 334.3 177.7 472 352.7 509.1 429 525.3 491.5 470 509.1 405.4l1.5-5.5c5.4-19.7-4.7-40.3-23.5-48.1l-97.3-40.5c-16.5-6.9-35.6-2.1-47 11.8l-38.6 47.2c-70.3-34.9-126.9-93.3-159.4-165l44.2-36c13.9-11.3 18.6-30.4 11.8-47z"/></svg>`,
-  book: `<svg viewBox="0 0 512 512" aria-hidden="true" fill="currentColor"><path d="M256 141.3v309.3l.5-.2A449 449 0 0 1 428.8 416H448V96h-19.2c-42.2 0-84.1 8.4-123.1 24.6-16.8 7-33.4 13.9-49.7 20.7m-25.1-79.8L256 72l25.1-10.5C327.9 42 378.1 32 428.8 32H464c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48h-35.2c-50.7 0-100.9 10-147.7 29.5l-12.8 5.3c-7.9 3.3-16.7 3.3-24.6 0l-12.8-5.3C184.1 490 133.9 480 83.2 480H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h35.2c50.7 0 100.9 10 147.7 29.5"/></svg>`,
-  go: `<svg class="line" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>`
-};
-
-const ext = 'target="_blank" rel="noopener"';
-
-const act = (cls, ico, title, sub, href, newTab = true) =>
-  `<a class="act ${cls}" href="${href}" ${newTab ? ext : ""}>
-     <span class="ico">${ico}</span>
-     <span class="tx"><b>${title}</b>${sub ? `<span>${sub}</span>` : ""}</span>
-     <span class="go">${L.go}</span>
-   </a>`;
-
-/* ---------- الصف الأول: واتساب (كبير) + اتصال (صغير) ---------- */
-let topRow = "";
-if (SITE.whatsapp) {
-  const href = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(SITE.whatsappMessage || "")}`;
-  topRow += `<a class="act wa" href="${href}" ${ext}>
-     <span class="ico">${B.wa}</span>
-     <span class="tx"><b>ابعت رسالة واتساب</b><span>افتح محادثة مباشرة</span></span>
-   </a>`;
-}
-if (SITE.phone) {
-  topRow += `<a class="callbtn" href="tel:${SITE.phone}" aria-label="اتصل بنا على ${SITE.phone}">
-     ${L.tel}<b>اتصل</b><small dir="ltr">${SITE.phone}</small>
-   </a>`;
-}
-
-/* ---------- باقي الأزرار ---------- */
-const more = [];
-if (SITE.mapUrl) {
-  more.push(act("map", B.map, "العنوان على الخريطة (GPS)",
-    SITE.addressText || "افتح موقع المصنع على Google Maps", SITE.mapUrl));
-}
-if (SITE.catalog) {
-  more.push(act("plain", L.book, "شوف الكتالوج", "الموديلات والمقاسات", SITE.catalog));
-}
-if (SITE.telegram) {
-  more.push(act("plain", B.tg, "تليجرام", "@" + SITE.telegram, `https://t.me/${SITE.telegram}`));
-}
-document.getElementById("actions").innerHTML =
-  (topRow ? `<div class="top">${topRow}</div>` : "") +
-  (more.length ? `<div class="more">${more.join("")}</div>` : "");
-
-/* ---------- السوشيال ---------- */
-const soc = [
-  ["facebook","فيسبوك",B.fb],["instagram","انستجرام",B.ig],
-  ["tiktok","تيك توك",B.tt],["youtube","يوتيوب",B.yt]
-].filter(([k]) => SITE[k]);
-if (soc.length) {
-  document.getElementById("grid").innerHTML = soc.map(([k,n,ic]) =>
-    `<a class="soc" href="${SITE[k]}" ${ext}><span class="ico">${ic}</span>${n}</a>`).join("");
-  document.getElementById("social").hidden = false;
-}
-</script>
 </body>
 </html>
