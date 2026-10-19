@@ -351,11 +351,44 @@
       const repo = getRepositoryInfo();
       const base = `${repo.root}/${folder}/`;
       const files = await readAllRepositoryImages();
-      return files.filter(file => file.path.startsWith(base)).map(file => file.url);
+      const folderFiles = files.filter(file => file.path.startsWith(base));
+      const originalsByPath = new Map();
+      const webpsByPath = new Map();
+      for (const file of folderFiles) {
+        const match = file.path.match(/^(.*)\.(png|jpe?g|webp)$/i);
+        if (!match) continue;
+        const path = match[1].toLowerCase();
+        if (/\.webp$/i.test(file.path)) {
+          if (!webpsByPath.has(path)) webpsByPath.set(path, file);
+        } else if (!originalsByPath.has(path)) {
+          originalsByPath.set(path, file);
+        }
+      }
+
+      const seenPaths = new Set();
+      return folderFiles.flatMap(file => {
+        const match = file.path.match(/^(.*)\.(png|jpe?g|webp)$/i);
+        if (!match) return [{ url: file.url, fallbackUrl: file.url }];
+        const path = match[1].toLowerCase();
+        if (seenPaths.has(path)) return [];
+        seenPaths.add(path);
+        const webp = webpsByPath.get(path);
+        const original = originalsByPath.get(path);
+        const image = webp || original;
+        return image ? [{ url: image.url, fallbackUrl: original?.url || image.url }] : [];
+      });
+    }
+
+    function imageMarkup(image, alt, loading = "lazy", onerror = "") {
+      const webpSource = image.url !== image.fallbackUrl
+        ? `<source type="image/webp" srcset="${esc(image.url)}">`
+        : "";
+      const errorHandler = onerror ? ` onerror="${onerror}"` : "";
+      return `<picture>${webpSource}<img src="${esc(image.fallbackUrl)}" alt="${esc(alt)}" loading="${loading}" decoding="async"${errorHandler}></picture>`;
     }
 
     function localFolderImages() {
-      return ["../logo.png"];
+      return [{ url: "../logo.png", fallbackUrl: "../logo.png" }];
     }
 
     async function loadImages() {
@@ -386,7 +419,7 @@
       const items = state.products.filter(product => product.cat === state.category && (!query || `${product.name} ${product.desc}`.toLowerCase().includes(query)));
       $("#grid").innerHTML = items.length ? items.map((product, index) => `
         <button class="card" type="button" data-product="${esc(product.id)}" aria-label="فتح تفاصيل ${esc(product.name)}">
-          <span class="card-image"><img src="${esc(product.images[0])}" alt="${esc(product.name)}" loading="lazy" onerror="this.closest('.card').remove()"></span>
+          <span class="card-image">${imageMarkup(product.images[0], product.name, "lazy", "this.closest('.card').remove()")}</span>
           <span class="card-name">${esc(product.name)}</span>
         </button>`).join("") : `<p class="empty">لا توجد منتجات في هذا القسم حاليًا</p>`;
     }
@@ -400,7 +433,7 @@
     }
 
     function renderGallery(images) {
-      $("#galleryTrack").innerHTML = images.length ? images.map((image, i) => `<div class="gallery-slide"><img src="${esc(image)}" alt="صورة من مصنع الفارس" loading="${i ? "lazy" : "eager"}"></div>`).join("") : `<div class="gallery-empty">أضف صور أرض الواقع داخل مجلد gallery</div>`;
+      $("#galleryTrack").innerHTML = images.length ? images.map((image, i) => `<div class="gallery-slide">${imageMarkup(image, "صورة من مصنع الفارس", i ? "lazy" : "eager")}</div>`).join("") : `<div class="gallery-empty">أضف صور أرض الواقع داخل مجلد gallery</div>`;
       $("#galleryDots").innerHTML = images.map((_, i) => `<button class="gallery-dot${i === 0 ? " active" : ""}" type="button" data-gallery-index="${i}" aria-label="الصورة ${i + 1}"></button>`).join("");
       setGallerySlide(0);
       if (images.length > 1) window.setInterval(() => setGallerySlide(state.galleryIndex + 1), 5000);
@@ -444,7 +477,7 @@
       $("#optionArea").hidden = !options.length;
       $("#optionLabel").textContent = product.type === "mattress" ? "الارتفاعات المتاحة" : "المقاسات المتاحة";
       $("#optionButtons").innerHTML = options.map(option => `<button class="height-btn" type="button" data-option="${esc(option)}" aria-pressed="false">${esc(option)}</button>`).join("");
-      $("#detailTrack").innerHTML = product.images.map(image => `<div class="detail-slide"><img src="${esc(image)}" alt="${esc(product.name)}"></div>`).join("");
+      $("#detailTrack").innerHTML = product.images.map(image => `<div class="detail-slide">${imageMarkup(image, product.name)}</div>`).join("");
       $("#detailDots").innerHTML = product.images.map((_, i) => `<button class="detail-dot${i === 0 ? " active" : ""}" type="button" data-detail-index="${i}" aria-label="الصورة ${i + 1}"></button>`).join("");
       $("#modal").hidden = false;
       document.body.style.overflow = "hidden";

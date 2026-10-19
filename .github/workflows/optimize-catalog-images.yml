@@ -1,0 +1,50 @@
+name: Optimize catalog images
+
+on:
+  push:
+    paths:
+      - "catalog/catalog/**/*.png"
+      - "catalog/catalog/**/*.jpg"
+      - "catalog/catalog/**/*.jpeg"
+      - "catalog/catalog/**/*.PNG"
+      - "catalog/catalog/**/*.JPG"
+      - "catalog/catalog/**/*.JPEG"
+      - "gallery/**/*.png"
+      - "gallery/**/*.jpg"
+      - "gallery/**/*.jpeg"
+      - "gallery/**/*.PNG"
+      - "gallery/**/*.JPG"
+      - "gallery/**/*.JPEG"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  optimize-images:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Pillow
+        run: python -m pip install Pillow
+
+      - name: Generate WebP images and remove converted originals
+        run: python scripts/optimize_catalog_images.py catalog/catalog gallery
+
+      - name: Commit optimized images
+        run: |
+          git add -A -- catalog/catalog gallery
+          if git diff --cached --quiet; then
+            echo "No optimized images changed."
+          else
+            git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit -m "Generate optimized catalog WebP images [skip ci]"
+          fi
