@@ -81,7 +81,14 @@
 
     .gallery-track { display: flex; min-height: 150px; transition: transform .45s ease; direction: ltr; }
     .gallery-slide { display: grid; min-width: 100%; min-height: 150px; place-items: center; }
-    .gallery-slide img { display: block; width: 100%; height: 260px; object-fit: cover; }
+    .gallery-slide img {
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 260px;
+      object-fit: contain;
+    }
     .gallery-empty { display: grid; min-height: 150px; place-items: center; padding: 25px; color: var(--muted); font-size: .85rem; }
     .gallery-btn {
       position: absolute;
@@ -153,7 +160,15 @@
     .card:hover { border-color: rgba(47, 214, 247, .75); background: var(--glass-strong); transform: translateY(-2px); }
     .card:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
     .card-image { display: grid; aspect-ratio: 1 / 1; place-items: center; overflow: hidden; background: rgba(3, 11, 47, .5); }
-    .card-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .card-image img {
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 100%;
+      padding: 8px;
+      object-fit: contain;
+    }
     .card-name { min-height: 48px; padding: 9px 10px 11px; color: #fff; font-size: .9rem; font-weight: 700; line-height: 1.4; }
     .empty { grid-column: 1 / -1; padding: 42px 0; color: var(--muted); text-align: center; }
 
@@ -282,7 +297,7 @@
       { id: "me5da", name: "مخدات" }
     ];
 
-    const config = window.CATALOG || {};
+    const config = typeof CATALOG !== "undefined" ? CATALOG : (window.CATALOG || {});
     const categories = FALLBACK_CATEGORIES.map(fallback => {
       const old = (config.categories || []).find(item => item.id === fallback.id);
       return { ...fallback, name: old?.name || fallback.name };
@@ -306,16 +321,37 @@
       };
     }
 
+    let repositoryImagesPromise;
+
+    async function readAllRepositoryImages() {
+      if (repositoryImagesPromise) return repositoryImagesPromise;
+      repositoryImagesPromise = (async () => {
+        const repo = getRepositoryInfo();
+        const url = `https://api.github.com/repos/${encodeURIComponent(repo.owner)}/${encodeURIComponent(repo.repo)}/git/trees/${encodeURIComponent(repo.branch)}?recursive=1`;
+        try {
+          const response = await fetch(url, { headers: { Accept: "application/vnd.github+json" } });
+          if (!response.ok) throw new Error(`GitHub tree request failed: ${response.status}`);
+          const data = await response.json();
+          const base = `${repo.root}/`;
+          return (data.tree || [])
+            .filter(item => item.type === "blob" && item.path.startsWith(base) && IMAGE_EXTENSIONS.test(item.path))
+            .map(item => ({
+              path: item.path,
+              url: `https://raw.githubusercontent.com/${repo.owner}/${repo.repo}/${repo.branch}/${item.path.split("/").map(encodeURIComponent).join("/")}`
+            }));
+        } catch (error) {
+          console.warn("تعذر قراءة صور GitHub:", error);
+          return [];
+        }
+      })();
+      return repositoryImagesPromise;
+    }
+
     async function readFolder(folder) {
       const repo = getRepositoryInfo();
-      if (!repo) return [];
-      const url = `https://api.github.com/repos/${encodeURIComponent(repo.owner)}/${encodeURIComponent(repo.repo)}/contents/${repo.root}/${encodeURIComponent(folder)}?ref=${repo.branch}`;
-      try {
-        const response = await fetch(url, { headers: { Accept: "application/vnd.github+json" } });
-        if (!response.ok) return [];
-        const files = await response.json();
-        return Array.isArray(files) ? files.filter(file => file.type === "file" && IMAGE_EXTENSIONS.test(file.name)).map(file => file.download_url || file.html_url) : [];
-      } catch { return []; }
+      const base = `${repo.root}/${folder}/`;
+      const files = await readAllRepositoryImages();
+      return files.filter(file => file.path.startsWith(base)).map(file => file.url);
     }
 
     function localFolderImages() {
