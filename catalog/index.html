@@ -1,178 +1,471 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>كتالوج مصنع الفارس للمراتب</title>
-<meta name="description" content="كتالوج مصنع الفارس للمراتب والإسفنج — مراتب طبي وسوست وسوفت ومخدات وكثرات.">
-<meta name="theme-color" content="#0a2166">
-<link rel="icon" href="../logo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Reem+Kufi:wght@500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --blue-1:#112f86; --blue-2:#0a2166; --blue-3:#06174d; --blue-4:#030b2f;
-    --cyan:#2fd6f7; --glass:rgba(255,255,255,.09); --glass-line:rgba(255,255,255,.22);
-    --text:#fff; --muted:rgba(255,255,255,.74);
-  }
-  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-  html{background:var(--blue-4)}
-  body{
-    min-height:100vh;font-family:"IBM Plex Sans Arabic",system-ui,sans-serif;color:var(--text);
-    background:radial-gradient(90% 55% at 50% 10%, var(--blue-1), var(--blue-2) 55%, var(--blue-3) 85%, var(--blue-4));
-    background-attachment:fixed;
-    padding:max(12px,env(safe-area-inset-top)) clamp(12px,3vw,28px) max(24px,env(safe-area-inset-bottom));
-  }
-  main{width:100%;max-width:1100px;margin-inline:auto}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>كتالوج مصنع الفارس للمراتب</title>
+  <meta name="description" content="كتالوج مصنع الفارس للمراتب — طبي، سوست، سوفت، سوست نص طبي، كفرات ومخدات.">
+  <meta name="theme-color" content="#071b59">
+  <link rel="icon" href="../logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Reem+Kufi:wght@500;600&display=swap" rel="stylesheet">
 
-  /* ---------- الهيدر ---------- */
-  header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-  header .back{
-    flex:none;display:flex;align-items:center;gap:4px;padding:8px 12px;border-radius:12px;
-    background:var(--glass);border:1px solid var(--glass-line);color:#fff;text-decoration:none;font-size:.85rem;font-weight:600;
-  }
-  header .back svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-  header h1{flex:1;text-align:center;font-family:"Reem Kufi",sans-serif;font-weight:500;font-size:1.2rem}
-  header img{width:44px;height:auto;flex:none}
+  <style>
+    :root {
+      --blue-1: #12358e;
+      --blue-2: #0a2166;
+      --blue-3: #06174d;
+      --blue-4: #030b2f;
+      --cyan: #2fd6f7;
+      --green: #25d366;
+      --glass: rgba(255, 255, 255, .09);
+      --glass-strong: rgba(255, 255, 255, .14);
+      --line: rgba(255, 255, 255, .22);
+      --text: #fff;
+      --muted: rgba(255, 255, 255, .74);
+    }
 
-  /* ---------- بحث + أقسام ---------- */
-  .search{
-    width:100%;padding:11px 14px;border-radius:12px;border:1px solid var(--glass-line);
-    background:var(--glass);color:#fff;font:inherit;font-size:.95rem;outline:none;
-  }
-  .search::placeholder{color:var(--muted)}
-  .search:focus{border-color:var(--cyan)}
-  .tabs{display:flex;gap:8px;overflow-x:auto;padding:10px 0 12px;scrollbar-width:none}
-  .tabs::-webkit-scrollbar{display:none}
-  .tab{
-    flex:none;padding:7px 14px;border-radius:999px;border:1px solid var(--glass-line);
-    background:var(--glass);color:#fff;font:inherit;font-size:.88rem;font-weight:600;cursor:pointer;
-    transition:background .2s,color .2s,border-color .2s;
-  }
-  .tab[aria-pressed="true"]{background:#fff;color:#08206b;border-color:#fff}
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: var(--blue-4); scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      color: var(--text);
+      font-family: "IBM Plex Sans Arabic", system-ui, sans-serif;
+      background: radial-gradient(90% 55% at 50% 10%, var(--blue-1), var(--blue-2) 55%, var(--blue-3) 85%, var(--blue-4));
+      background-attachment: fixed;
+      padding: max(12px, env(safe-area-inset-top)) clamp(12px, 3vw, 28px) max(24px, env(safe-area-inset-bottom));
+    }
 
-  /* ---------- كروت المنتجات ---------- */
-  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-  @media (min-width:700px){ .grid{grid-template-columns:repeat(3,1fr);gap:14px} }
-  @media (min-width:1000px){ .grid{grid-template-columns:repeat(4,1fr)} }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    a { color: inherit; }
+    main { width: 100%; max-width: 1100px; margin-inline: auto; }
 
-  .card{
-    display:flex;flex-direction:column;border-radius:16px;overflow:hidden;
-    background:var(--glass);border:1px solid var(--glass-line);
-  }
-  .pic{position:relative;aspect-ratio:4/3;background:rgba(3,11,47,.5);display:grid;place-items:center}
-  .pic img.photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-  .pic img.ph{width:32%;opacity:.35}
-  .body{display:flex;flex-direction:column;gap:6px;padding:10px 10px 12px;flex:1}
-  .cat{font-size:.72rem;color:var(--cyan);font-weight:600}
-  .name{font-size:.95rem;font-weight:700;line-height:1.35}
-  .meta{font-size:.78rem;color:var(--muted)}
-  .desc{font-size:.8rem;color:var(--muted);line-height:1.5}
-  .sizes{display:flex;flex-wrap:wrap;gap:5px}
-  .size{
-    padding:4px 8px;border-radius:8px;border:1px solid var(--glass-line);background:transparent;color:#fff;
-    font:inherit;font-size:.74rem;cursor:pointer;direction:ltr;
-  }
-  .size[aria-pressed="true"]{background:var(--cyan);border-color:var(--cyan);color:#04202a;font-weight:700}
-  .price{font-weight:700;font-size:.95rem}
-  .order{
-    margin-top:auto;display:flex;align-items:center;justify-content:center;gap:7px;
-    padding:9px 8px;border-radius:12px;text-decoration:none;font-weight:700;font-size:.85rem;color:#04230f;
-    background:linear-gradient(180deg,#43e97b,#25D366 60%,#1aa84f);
-  }
-  .order svg{width:18px;height:18px}
-  .empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:40px 0}
-  @media (hover:hover){.tab:hover{background:rgba(255,255,255,.16)}.tab[aria-pressed="true"]:hover{background:#fff}.order:hover{filter:brightness(1.06)}}
-  a:focus-visible,button:focus-visible{outline:2px solid #fff;outline-offset:2px}
-  footer{margin-top:22px;text-align:center;color:var(--muted);font-size:.74rem}
-</style>
+    .topbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .back {
+      display: flex;
+      flex: none;
+      align-items: center;
+      gap: 4px;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: #fff;
+      background: var(--glass);
+      text-decoration: none;
+      font-size: .85rem;
+      font-weight: 600;
+    }
+
+    .back svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    .brand-title { flex: 1; text-align: center; font-family: "Reem Kufi", sans-serif; font-size: 1.2rem; font-weight: 500; }
+    .brand-logo { width: 44px; height: auto; flex: none; }
+
+    .gallery {
+      position: relative;
+      overflow: hidden;
+      min-height: 150px;
+      margin-bottom: 14px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(3, 11, 47, .5);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, .18);
+    }
+
+    .gallery-track { display: flex; min-height: 150px; transition: transform .45s ease; direction: ltr; }
+    .gallery-slide { display: grid; min-width: 100%; min-height: 150px; place-items: center; }
+    .gallery-slide img { display: block; width: 100%; height: 260px; object-fit: cover; }
+    .gallery-empty { display: grid; min-height: 150px; place-items: center; padding: 25px; color: var(--muted); font-size: .85rem; }
+    .gallery-btn {
+      position: absolute;
+      top: 50%;
+      z-index: 2;
+      display: grid;
+      width: 36px;
+      height: 36px;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, .38);
+      border-radius: 50%;
+      color: #fff;
+      background: rgba(0, 0, 47, .58);
+      transform: translateY(-50%);
+    }
+    .gallery-btn.prev { right: 10px; }
+    .gallery-btn.next { left: 10px; }
+    .gallery-dots { position: absolute; right: 0; bottom: 9px; left: 0; display: flex; justify-content: center; gap: 5px; direction: ltr; }
+    .gallery-dot { width: 7px; height: 7px; border: 0; border-radius: 50%; background: rgba(255, 255, 255, .45); }
+    .gallery-dot.active { width: 20px; border-radius: 99px; background: var(--cyan); }
+
+    .search {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      outline: none;
+      color: #fff;
+      background: var(--glass);
+      font-size: .95rem;
+    }
+    .search::placeholder { color: var(--muted); }
+    .search:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(47, 214, 247, .12); }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      padding: 10px 0 14px;
+    }
+    .tab {
+      min-height: 43px;
+      padding: 7px 6px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: #fff;
+      background: var(--glass);
+      font-size: .84rem;
+      font-weight: 600;
+      transition: background .2s, color .2s, border-color .2s, transform .2s;
+    }
+    .tab:hover { background: var(--glass-strong); }
+    .tab[aria-pressed="true"] { border-color: #fff; color: #08206b; background: #fff; }
+    .tab:active { transform: scale(.98); }
+
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    @media (min-width: 700px) { .grid { grid-template-columns: repeat(3, 1fr); gap: 14px; } }
+    @media (min-width: 1000px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+
+    .card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      color: #fff;
+      background: var(--glass);
+      text-align: right;
+      transition: transform .2s, border-color .2s, background .2s;
+    }
+    .card:hover { border-color: rgba(47, 214, 247, .75); background: var(--glass-strong); transform: translateY(-2px); }
+    .card:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+    .card-image { display: grid; aspect-ratio: 1 / 1; place-items: center; overflow: hidden; background: rgba(3, 11, 47, .5); }
+    .card-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .card-name { min-height: 48px; padding: 9px 10px 11px; color: #fff; font-size: .9rem; font-weight: 700; line-height: 1.4; }
+    .empty { grid-column: 1 / -1; padding: 42px 0; color: var(--muted); text-align: center; }
+
+    .modal[hidden] { display: none; }
+    .modal { position: fixed; z-index: 10; inset: 0; display: grid; place-items: center; padding: 16px; background: rgba(0, 0, 20, .76); }
+    .modal-box {
+      position: relative;
+      width: min(100%, 640px);
+      max-height: min(92vh, 860px);
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: linear-gradient(155deg, #122e82, #06174d 70%, #030b2f);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .45);
+    }
+    .modal-close { position: absolute; z-index: 3; top: 10px; left: 10px; display: grid; width: 36px; height: 36px; place-items: center; border: 1px solid rgba(255,255,255,.35); border-radius: 50%; color: #fff; background: rgba(0,0,47,.55); font-size: 1.35rem; }
+    .detail-gallery { position: relative; overflow: hidden; background: rgba(3, 11, 47, .5); }
+    .detail-track { display: flex; direction: ltr; transition: transform .35s ease; }
+    .detail-slide { display: grid; min-width: 100%; aspect-ratio: 1 / .78; place-items: center; }
+    .detail-slide img { display: block; width: 100%; height: 100%; object-fit: contain; }
+    .detail-arrow { position: absolute; top: 50%; display: grid; width: 35px; height: 35px; place-items: center; border: 1px solid rgba(255,255,255,.35); border-radius: 50%; color: #fff; background: rgba(0,0,47,.55); transform: translateY(-50%); }
+    .detail-arrow.prev { right: 10px; }
+    .detail-arrow.next { left: 10px; }
+    .detail-dots { position: absolute; right: 0; bottom: 10px; left: 0; display: flex; justify-content: center; gap: 5px; direction: ltr; }
+    .detail-dot { width: 7px; height: 7px; border: 0; border-radius: 50%; background: rgba(255,255,255,.45); }
+    .detail-dot.active { width: 20px; border-radius: 99px; background: var(--cyan); }
+    .detail-content { padding: 16px; }
+    .detail-category { color: var(--cyan); font-size: .78rem; font-weight: 700; }
+    .detail-title { margin-top: 4px; font-size: 1.2rem; line-height: 1.45; }
+    .detail-description { margin-top: 8px; color: var(--muted); font-size: .88rem; line-height: 1.7; }
+    .detail-label { display: block; margin: 15px 0 7px; font-size: .88rem; font-weight: 700; }
+    .size-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .field { width: 100%; padding: 10px 11px; border: 1px solid var(--line); border-radius: 10px; outline: none; color: #fff; background: rgba(255,255,255,.08); }
+    .field::placeholder { color: var(--muted); }
+    .field:focus { border-color: var(--cyan); }
+    .height-options { display: flex; flex-wrap: wrap; gap: 7px; }
+    .height-btn { padding: 8px 12px; border: 1px solid var(--line); border-radius: 9px; color: #fff; background: transparent; font-size: .82rem; }
+    .height-btn[aria-pressed="true"] { border-color: var(--cyan); color: #04202a; background: var(--cyan); font-weight: 700; }
+    .details-order { display: flex; width: 100%; align-items: center; justify-content: center; gap: 8px; margin-top: 17px; padding: 12px; border: 0; border-radius: 12px; color: #04230f; background: linear-gradient(180deg, #43e97b, var(--green) 60%, #1aa84f); font-weight: 700; text-decoration: none; }
+    .details-order svg { width: 20px; height: 20px; }
+
+    footer { margin-top: 22px; color: var(--muted); font-size: .74rem; text-align: center; }
+    a:focus-visible, button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+    @media (max-width: 430px) {
+      .gallery-slide img { height: 190px; }
+      .brand-title { font-size: 1.05rem; }
+      .brand-logo { width: 38px; }
+      .back { padding-inline: 9px; font-size: .78rem; }
+      .tab { font-size: .78rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+  </style>
 </head>
+
 <body>
-<main>
-  <header>
-    <a class="back" href="../">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>الرئيسية
-    </a>
-    <h1>كتالوج مصنع الفارس</h1>
-    <img src="../logo.png" alt="" width="701" height="952">
-  </header>
+  <main>
+    <header class="topbar">
+      <a class="back" href="../" aria-label="العودة إلى الصفحة الرئيسية">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        الرئيسية
+      </a>
+      <h1 class="brand-title">كتالوج مصنع الفارس</h1>
+      <img class="brand-logo" src="../logo.png" alt="" width="701" height="952">
+    </header>
 
-  <input class="search" id="q" type="search" placeholder="ابحث عن منتج..." aria-label="بحث">
-  <div class="tabs" id="tabs" role="group" aria-label="الأقسام"></div>
-  <section class="grid" id="grid" aria-live="polite"></section>
+    <section class="gallery" aria-label="صور من المصنع">
+      <div id="galleryTrack" class="gallery-track"></div>
+      <button id="galleryPrev" class="gallery-btn prev" type="button" aria-label="الصورة السابقة">›</button>
+      <button id="galleryNext" class="gallery-btn next" type="button" aria-label="الصورة التالية">‹</button>
+      <div id="galleryDots" class="gallery-dots"></div>
+    </section>
 
-  <footer>© مصنع الفارس للمراتب</footer>
-</main>
+    <input id="search" class="search" type="search" placeholder="ابحث عن منتج..." aria-label="بحث عن منتج">
+    <nav id="tabs" class="tabs" aria-label="أقسام الكتالوج"></nav>
+    <section id="grid" class="grid" aria-live="polite"></section>
 
-<script src="products.js"></script>
-<script>
-const WA_ICON = `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#04230f" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52s.198-.298.298-.497c.099-.198.05-.371-.025-.52s-.669-1.612-.916-2.207c-.242-.579-.487-.5-.669-.51a13 13 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074s2.096 3.2 5.077 4.487c.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413s.248-1.289.173-1.413c-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.82 11.82 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.9 11.9 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.82 11.82 0 0 0-3.48-8.413"/></svg>`;
+    <footer>© مصنع الفارس للمراتب</footer>
+  </main>
 
-const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const catName = id => (CATALOG.categories.find(c => c.id === id) || {}).name || "";
+  <div id="modal" class="modal" hidden>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+      <button id="modalClose" class="modal-close" type="button" aria-label="إغلاق">×</button>
+      <section class="detail-gallery" aria-label="صور المنتج">
+        <div id="detailTrack" class="detail-track"></div>
+        <button id="detailPrev" class="detail-arrow prev" type="button" aria-label="الصورة السابقة">›</button>
+        <button id="detailNext" class="detail-arrow next" type="button" aria-label="الصورة التالية">‹</button>
+        <div id="detailDots" class="detail-dots"></div>
+      </section>
+      <section class="detail-content">
+        <div id="detailCategory" class="detail-category"></div>
+        <h2 id="detailTitle" class="detail-title"></h2>
+        <p id="detailDescription" class="detail-description"></p>
+        <div id="sizeArea">
+          <label class="detail-label">اكتب المقاس المطلوب</label>
+          <div class="size-fields">
+            <input id="lengthInput" class="field" type="number" min="1" inputmode="numeric" placeholder="الطول بالسنتيمتر">
+            <input id="widthInput" class="field" type="number" min="1" inputmode="numeric" placeholder="العرض بالسنتيمتر">
+          </div>
+        </div>
+        <div id="optionArea">
+          <span id="optionLabel" class="detail-label">الارتفاعات المتاحة</span>
+          <div id="optionButtons" class="height-options"></div>
+        </div>
+        <a id="orderButton" class="details-order" href="#" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52s.198-.298.298-.497c.099-.198.05-.371-.025-.52s-.669-1.612-.916-2.207c-.242-.579-.487-.5-.669-.51a13 13 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074s2.096 3.2 5.077 4.487c.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413s.248-1.289.173-1.413c-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.82 11.82 0 0 0 12.05 0C5.495.0.16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.9 11.9 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.82 11.82 0 0 0-3.48-8.413"/></svg>
+          اطلب على واتساب
+        </a>
+      </section>
+    </div>
+  </div>
 
-const state = { cat: "all", q: "", pick: {} };   // pick = المقاس المختار لكل منتج
-const grid = document.getElementById("grid");
-const tabs = document.getElementById("tabs");
+  <script src="products.js"></script>
+  <script>
+    const IMAGE_EXTENSIONS = /\.(png|jpe?g|webp|gif|avif)$/i;
+    const FALLBACK_WHATSAPP = "201023010934";
+    const FALLBACK_CATEGORIES = [
+      { id: "tyby", name: "طبي" },
+      { id: "sosat", name: "سوست" },
+      { id: "soft", name: "سوفت" },
+      { id: "sosattyby", name: "سوست نص طبي" },
+      { id: "kavar", name: "كفرات" },
+      { id: "me5da", name: "مخدات" }
+    ];
 
-function waLink(p, i) {
-  const size = state.pick[i];
-  let msg = `أهلاً، عايز أستفسر عن: ${p.name}`;
-  if (size) msg += ` — مقاس ${size}`;
-  return `https://wa.me/${CATALOG.whatsapp}?text=${encodeURIComponent(msg)}`;
-}
+    const config = window.CATALOG || {};
+    const categories = FALLBACK_CATEGORIES.map(fallback => {
+      const old = (config.categories || []).find(item => item.id === fallback.id);
+      return { ...fallback, name: old?.name || fallback.name };
+    });
+    const productData = config.products || [];
+    const whatsapp = config.whatsapp || FALLBACK_WHATSAPP;
+    const state = { category: categories[0].id, query: "", products: [], activeProduct: null, detailIndex: 0, galleryIndex: 0, selectedOption: "" };
 
-function renderTabs() {
-  const used = CATALOG.categories.filter(c => CATALOG.products.some(p => p.cat === c.id));
-  const all = [{ id: "all", name: "الكل" }, ...used];
-  tabs.innerHTML = all.map(c =>
-    `<button class="tab" data-cat="${esc(c.id)}" aria-pressed="${state.cat === c.id}">${esc(c.name)}</button>`).join("");
-}
+    const $ = selector => document.querySelector(selector);
+    const esc = value => String(value ?? "").replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]));
+    const categoryName = id => categories.find(category => category.id === id)?.name || id;
 
-function renderGrid() {
-  const q = state.q.trim().toLowerCase();
-  const list = CATALOG.products
-    .map((p, i) => ({ p, i }))
-    .filter(({ p }) => (state.cat === "all" || p.cat === state.cat) &&
-      (!q || (p.name + " " + (p.desc || "")).toLowerCase().includes(q)));
+    function getRepositoryInfo() {
+      const host = location.hostname;
+      const parts = location.pathname.split("/").filter(Boolean);
+      if (!host.endsWith("github.io")) return null;
+      const owner = host.split(".")[0];
+      const catalogIndex = parts.lastIndexOf("catalog");
+      const repo = catalogIndex > 0 ? parts[catalogIndex - 1] : `${owner}.github.io`;
+      return { owner, repo, branch: "main" };
+    }
 
-  if (!list.length) { grid.innerHTML = `<p class="empty">مفيش منتجات مطابقة</p>`; return; }
+    async function readFolder(folder) {
+      const repo = getRepositoryInfo();
+      if (!repo) return [];
+      const url = `https://api.github.com/repos/${encodeURIComponent(repo.owner)}/${encodeURIComponent(repo.repo)}/contents/catalog/${encodeURIComponent(folder)}?ref=${repo.branch}`;
+      try {
+        const response = await fetch(url, { headers: { Accept: "application/vnd.github+json" } });
+        if (!response.ok) return [];
+        const files = await response.json();
+        return Array.isArray(files) ? files.filter(file => file.type === "file" && IMAGE_EXTENSIONS.test(file.name)).map(file => file.download_url || file.html_url) : [];
+      } catch { return []; }
+    }
 
-  grid.innerHTML = list.map(({ p, i }) => `
-    <article class="card">
-      <div class="pic">
-        <img class="ph" src="../logo.png" alt="">
-        ${p.image ? `<img class="photo" src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy" onerror="this.remove()">` : ""}
-      </div>
-      <div class="body">
-        <span class="cat">${esc(catName(p.cat))}</span>
-        <h2 class="name">${esc(p.name)}</h2>
-        ${p.thickness ? `<span class="meta">السُمك: ${esc(p.thickness)}</span>` : ""}
-        ${p.desc ? `<p class="desc">${esc(p.desc)}</p>` : ""}
-        ${(p.sizes || []).length ? `<div class="sizes" data-i="${i}">${p.sizes.map(s =>
-          `<button class="size" data-size="${esc(s)}" aria-pressed="${state.pick[i] === s}">${esc(s)}</button>`).join("")}</div>` : ""}
-        ${p.price ? `<span class="price">${esc(p.price)}</span>` : ""}
-        <a class="order" data-i="${i}" href="${waLink(p, i)}" target="_blank" rel="noopener">${WA_ICON}اطلب واتساب</a>
-      </div>
-    </article>`).join("");
-}
+    function localFolderImages(folder) {
+      return [`${folder}/`];
+    }
 
-tabs.addEventListener("click", e => {
-  const b = e.target.closest(".tab"); if (!b) return;
-  state.cat = b.dataset.cat; renderTabs(); renderGrid();
-});
-document.getElementById("q").addEventListener("input", e => { state.q = e.target.value; renderGrid(); });
+    async function loadImages() {
+      const folderResults = await Promise.all(categories.map(async category => ({ category, images: await readFolder(category.id) })));
+      state.products = folderResults.map(({ category, images }, index) => {
+        const defined = productData.find(product => product.cat === category.id) || {};
+        const fallbackImage = localFolderImages(category.id);
+        return {
+          id: category.id,
+          cat: category.id,
+          name: defined.name || category.name,
+          desc: defined.desc || "",
+          sizes: defined.sizes || [],
+          thickness: defined.thickness || "",
+          options: defined.heights || defined.options || [],
+          type: defined.type || (index < 4 ? "mattress" : "item"),
+          images: images.length ? images : fallbackImage
+        };
+      });
+    }
 
-grid.addEventListener("click", e => {
-  const b = e.target.closest(".size"); if (!b) return;
-  const i = b.parentElement.dataset.i;
-  state.pick[i] = state.pick[i] === b.dataset.size ? "" : b.dataset.size;   // ضغطة تانية تلغي الاختيار
-  b.parentElement.querySelectorAll(".size").forEach(x => x.setAttribute("aria-pressed", x.dataset.size === state.pick[i]));
-  b.closest(".card").querySelector(".order").href = waLink(CATALOG.products[i], i);
-});
+    function renderTabs() {
+      $("#tabs").innerHTML = categories.map(category => `<button class="tab" type="button" data-category="${esc(category.id)}" aria-pressed="${state.category === category.id}">${esc(category.name)}</button>`).join("");
+    }
 
-renderTabs(); renderGrid();
-</script>
+    function renderGrid() {
+      const query = state.query.trim().toLowerCase();
+      const items = state.products.filter(product => product.cat === state.category && (!query || `${product.name} ${product.desc}`.toLowerCase().includes(query)));
+      $("#grid").innerHTML = items.length ? items.map((product, index) => `
+        <button class="card" type="button" data-product="${esc(product.id)}" aria-label="فتح تفاصيل ${esc(product.name)}">
+          <span class="card-image"><img src="${esc(product.images[0])}" alt="${esc(product.name)}" loading="lazy" onerror="this.closest('.card').remove()"></span>
+          <span class="card-name">${esc(product.name)}</span>
+        </button>`).join("") : `<p class="empty">لا توجد منتجات في هذا القسم حاليًا</p>`;
+    }
+
+    function setGallerySlide(index) {
+      const count = $("#galleryTrack").children.length;
+      if (!count) return;
+      state.galleryIndex = (index + count) % count;
+      $("#galleryTrack").style.transform = `translateX(${state.galleryIndex * 100}%)`;
+      $("#galleryDots").querySelectorAll(".gallery-dot").forEach((dot, i) => dot.classList.toggle("active", i === state.galleryIndex));
+    }
+
+    function renderGallery(images) {
+      $("#galleryTrack").innerHTML = images.length ? images.map((image, i) => `<div class="gallery-slide"><img src="${esc(image)}" alt="صورة من مصنع الفارس" loading="${i ? "lazy" : "eager"}"></div>`).join("") : `<div class="gallery-empty">أضف صور أرض الواقع داخل مجلد gallery</div>`;
+      $("#galleryDots").innerHTML = images.map((_, i) => `<button class="gallery-dot${i === 0 ? " active" : ""}" type="button" data-gallery-index="${i}" aria-label="الصورة ${i + 1}"></button>`).join("");
+      setGallerySlide(0);
+      if (images.length > 1) window.setInterval(() => setGallerySlide(state.galleryIndex + 1), 5000);
+    }
+
+    function setDetailSlide(index) {
+      const count = $("#detailTrack").children.length;
+      if (!count) return;
+      state.detailIndex = (index + count) % count;
+      $("#detailTrack").style.transform = `translateX(${state.detailIndex * 100}%)`;
+      $("#detailDots").querySelectorAll(".detail-dot").forEach((dot, i) => dot.classList.toggle("active", i === state.detailIndex));
+    }
+
+    function updateOrderLink() {
+      const product = state.activeProduct;
+      if (!product) return;
+      const length = $("#lengthInput").value.trim();
+      const width = $("#widthInput").value.trim();
+      const option = state.selectedOption;
+      let message = `السلام عليكم، عايز أطلب: ${product.name}`;
+      if (product.type === "mattress") {
+        if (length || width) message += ` — المقاس: طول ${length || "؟"} × عرض ${width || "؟"} سم`;
+        if (option) message += ` — الارتفاع: ${option}`;
+      } else if (option) {
+        message += ` — المقاس/الاختيار: ${option}`;
+      }
+      $("#orderButton").href = `https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`;
+    }
+
+    function openProduct(product) {
+      state.activeProduct = product;
+      state.detailIndex = 0;
+      state.selectedOption = "";
+      $("#detailCategory").textContent = categoryName(product.cat);
+      $("#detailTitle").textContent = product.name;
+      $("#detailDescription").textContent = product.desc || "تفاصيل المنتج متاحة من خلال التواصل على واتساب.";
+      $("#lengthInput").value = "";
+      $("#widthInput").value = "";
+      $("#sizeArea").hidden = product.type !== "mattress";
+      const options = product.options.length ? product.options : product.sizes;
+      $("#optionArea").hidden = !options.length;
+      $("#optionLabel").textContent = product.type === "mattress" ? "الارتفاعات المتاحة" : "المقاسات المتاحة";
+      $("#optionButtons").innerHTML = options.map(option => `<button class="height-btn" type="button" data-option="${esc(option)}" aria-pressed="false">${esc(option)}</button>`).join("");
+      $("#detailTrack").innerHTML = product.images.map(image => `<div class="detail-slide"><img src="${esc(image)}" alt="${esc(product.name)}"></div>`).join("");
+      $("#detailDots").innerHTML = product.images.map((_, i) => `<button class="detail-dot${i === 0 ? " active" : ""}" type="button" data-detail-index="${i}" aria-label="الصورة ${i + 1}"></button>`).join("");
+      $("#modal").hidden = false;
+      document.body.style.overflow = "hidden";
+      setDetailSlide(0);
+      updateOrderLink();
+    }
+
+    function closeModal() {
+      $("#modal").hidden = true;
+      document.body.style.overflow = "";
+      state.activeProduct = null;
+    }
+
+    async function init() {
+      renderTabs();
+      $("#grid").innerHTML = `<p class="empty">جاري تحميل المنتجات...</p>`;
+      const galleryImages = await readFolder("gallery");
+      renderGallery(galleryImages);
+      await loadImages();
+      renderGrid();
+    }
+
+    $("#tabs").addEventListener("click", event => {
+      const button = event.target.closest("[data-category]");
+      if (!button) return;
+      state.category = button.dataset.category;
+      renderTabs();
+      renderGrid();
+    });
+
+    $("#search").addEventListener("input", event => { state.query = event.target.value; renderGrid(); });
+    $("#grid").addEventListener("click", event => {
+      const card = event.target.closest("[data-product]");
+      if (card) openProduct(state.products.find(product => product.id === card.dataset.product));
+    });
+
+    $("#modalClose").addEventListener("click", closeModal);
+    $("#modal").addEventListener("click", event => { if (event.target === $("#modal")) closeModal(); });
+    document.addEventListener("keydown", event => { if (event.key === "Escape" && !$("#modal").hidden) closeModal(); });
+
+    $("#optionButtons").addEventListener("click", event => {
+      const button = event.target.closest("[data-option]");
+      if (!button) return;
+      state.selectedOption = state.selectedOption === button.dataset.option ? "" : button.dataset.option;
+      $("#optionButtons").querySelectorAll("[data-option]").forEach(item => item.setAttribute("aria-pressed", item.dataset.option === state.selectedOption));
+      updateOrderLink();
+    });
+    $("#lengthInput").addEventListener("input", updateOrderLink);
+    $("#widthInput").addEventListener("input", updateOrderLink);
+
+    $("#galleryPrev").addEventListener("click", () => setGallerySlide(state.galleryIndex - 1));
+    $("#galleryNext").addEventListener("click", () => setGallerySlide(state.galleryIndex + 1));
+    $("#galleryDots").addEventListener("click", event => { const dot = event.target.closest("[data-gallery-index]"); if (dot) setGallerySlide(Number(dot.dataset.galleryIndex)); });
+    $("#detailPrev").addEventListener("click", () => setDetailSlide(state.detailIndex - 1));
+    $("#detailNext").addEventListener("click", () => setDetailSlide(state.detailIndex + 1));
+    $("#detailDots").addEventListener("click", event => { const dot = event.target.closest("[data-detail-index]"); if (dot) setDetailSlide(Number(dot.dataset.detailIndex)); });
+
+    init();
+  </script>
 </body>
 </html>
