@@ -296,19 +296,20 @@
     const categoryName = id => categories.find(category => category.id === id)?.name || id;
 
     function getRepositoryInfo() {
-      const host = location.hostname;
-      const parts = location.pathname.split("/").filter(Boolean);
-      if (!host.endsWith("github.io")) return null;
-      const owner = host.split(".")[0];
-      const catalogIndex = parts.lastIndexOf("catalog");
-      const repo = catalogIndex > 0 ? parts[catalogIndex - 1] : `${owner}.github.io`;
-      return { owner, repo, branch: "main" };
+      // المستودع الفعلي: farisrashad333-del/Alfaris
+      // وملفات الكتالوج موجودة داخل: catalog/catalog/
+      return {
+        owner: "farisrashad333-del",
+        repo: "Alfaris",
+        branch: "main",
+        root: "catalog/catalog"
+      };
     }
 
     async function readFolder(folder) {
       const repo = getRepositoryInfo();
       if (!repo) return [];
-      const url = `https://api.github.com/repos/${encodeURIComponent(repo.owner)}/${encodeURIComponent(repo.repo)}/contents/catalog/${encodeURIComponent(folder)}?ref=${repo.branch}`;
+      const url = `https://api.github.com/repos/${encodeURIComponent(repo.owner)}/${encodeURIComponent(repo.repo)}/contents/${repo.root}/${encodeURIComponent(folder)}?ref=${repo.branch}`;
       try {
         const response = await fetch(url, { headers: { Accept: "application/vnd.github+json" } });
         if (!response.ok) return [];
@@ -317,8 +318,8 @@
       } catch { return []; }
     }
 
-    function localFolderImages(folder) {
-      return [`${folder}/`];
+    function localFolderImages() {
+      return ["../logo.png"];
     }
 
     async function loadImages() {
