@@ -352,19 +352,31 @@
       const base = `${repo.root}/${folder}/`;
       const files = await readAllRepositoryImages();
       const folderFiles = files.filter(file => file.path.startsWith(base));
-      const filesByPath = new Map(folderFiles.map(file => [file.path.toLowerCase(), file]));
-      const pairedWebpPaths = new Set();
-      const images = folderFiles
-        .filter(file => !/\.webp$/i.test(file.path))
-        .map(file => {
-          const webpPath = file.path.replace(/\.(png|jpe?g)$/i, ".webp").toLowerCase();
-          const webp = /\.(png|jpe?g)$/i.test(file.path) ? filesByPath.get(webpPath) : null;
-          if (webp) pairedWebpPaths.add(webp.path.toLowerCase());
-          return { url: webp?.url || file.url, fallbackUrl: file.url };
-        });
-      return images.concat(folderFiles
-        .filter(file => /\.webp$/i.test(file.path) && !pairedWebpPaths.has(file.path.toLowerCase()))
-        .map(file => ({ url: file.url, fallbackUrl: file.url })));
+      const originalsByPath = new Map();
+      const webpsByPath = new Map();
+      for (const file of folderFiles) {
+        const match = file.path.match(/^(.*)\.(png|jpe?g|webp)$/i);
+        if (!match) continue;
+        const path = match[1].toLowerCase();
+        if (/\.webp$/i.test(file.path)) {
+          if (!webpsByPath.has(path)) webpsByPath.set(path, file);
+        } else if (!originalsByPath.has(path)) {
+          originalsByPath.set(path, file);
+        }
+      }
+
+      const seenPaths = new Set();
+      return folderFiles.flatMap(file => {
+        const match = file.path.match(/^(.*)\.(png|jpe?g|webp)$/i);
+        if (!match) return [{ url: file.url, fallbackUrl: file.url }];
+        const path = match[1].toLowerCase();
+        if (seenPaths.has(path)) return [];
+        seenPaths.add(path);
+        const webp = webpsByPath.get(path);
+        const original = originalsByPath.get(path);
+        const image = webp || original;
+        return image ? [{ url: image.url, fallbackUrl: original?.url || image.url }] : [];
+      });
     }
 
     function imageMarkup(image, alt, loading = "lazy", onerror = "") {
