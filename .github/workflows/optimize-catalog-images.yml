@@ -9,12 +9,6 @@ on:
       - "catalog/catalog/**/*.PNG"
       - "catalog/catalog/**/*.JPG"
       - "catalog/catalog/**/*.JPEG"
-      - "gallery/**/*.png"
-      - "gallery/**/*.jpg"
-      - "gallery/**/*.jpeg"
-      - "gallery/**/*.PNG"
-      - "gallery/**/*.JPG"
-      - "gallery/**/*.JPEG"
   workflow_dispatch:
 
 permissions:
@@ -36,11 +30,11 @@ jobs:
         run: python -m pip install Pillow
 
       - name: Generate WebP images and remove converted originals
-        run: python scripts/optimize_catalog_images.py catalog/catalog gallery
+        run: python scripts/optimize_catalog_images.py catalog/catalog
 
       - name: Commit optimized images
         run: |
-          git add -A -- catalog/catalog gallery
+          git add -A -- catalog/catalog
           if git diff --cached --quiet; then
             echo "No optimized images changed."
           else
