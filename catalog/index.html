@@ -286,7 +286,7 @@
 
   <script src="products.js"></script>
   <script>
-    const IMAGE_EXTENSIONS = /\.(png|jpe?g|webp|gif|avif)$/i;
+    const IMAGE_EXTENSIONS = /\.webp$/i;
     const FALLBACK_WHATSAPP = "201023010934";
     const FALLBACK_CATEGORIES = [
       { id: "tyby", name: "طبي" },
@@ -351,32 +351,9 @@
       const repo = getRepositoryInfo();
       const base = `${repo.root}/${folder}/`;
       const files = await readAllRepositoryImages();
-      const folderFiles = files.filter(file => file.path.startsWith(base));
-      const originalsByPath = new Map();
-      const webpsByPath = new Map();
-      for (const file of folderFiles) {
-        const match = file.path.match(/^(.*)\.(png|jpe?g|webp)$/i);
-        if (!match) continue;
-        const path = match[1].toLowerCase();
-        if (/\.webp$/i.test(file.path)) {
-          if (!webpsByPath.has(path)) webpsByPath.set(path, file);
-        } else if (!originalsByPath.has(path)) {
-          originalsByPath.set(path, file);
-        }
-      }
-
-      const seenPaths = new Set();
-      return folderFiles.flatMap(file => {
-        const match = file.path.match(/^(.*)\.(png|jpe?g|webp)$/i);
-        if (!match) return [{ url: file.url, fallbackUrl: file.url }];
-        const path = match[1].toLowerCase();
-        if (seenPaths.has(path)) return [];
-        seenPaths.add(path);
-        const webp = webpsByPath.get(path);
-        const original = originalsByPath.get(path);
-        const image = webp || original;
-        return image ? [{ url: image.url, fallbackUrl: original?.url || image.url }] : [];
-      });
+      return files
+        .filter(file => file.path.startsWith(base) && IMAGE_EXTENSIONS.test(file.path))
+        .map(file => ({ url: file.url, fallbackUrl: file.url }));
     }
 
     function imageMarkup(image, alt, loading = "lazy", onerror = "") {

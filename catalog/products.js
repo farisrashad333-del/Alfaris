@@ -1,7 +1,7 @@
 /* =====================================================
    ✏️ ده الملف الوحيد اللي بتعدّل فيه الكتالوج
    - كل منتج بين { } وبينهم فاصلة
-   - الصور: WebP مفضل؛ PNG/JPG يظلان كنسخة أصلية بديلة عند الحاجة
+   - صور المنتجات: استخدم WebP فقط
    - السعر اتركه "" لو مش عايز تظهره
    - المنتجات اللي تحت تجريبية، امسحها واكتب منتجاتك
    ===================================================== */
@@ -26,7 +26,7 @@ const CATALOG = {
       thickness: "20 سم",
       desc: "وصف قصير للمنتج هنا (نوع الإسفنج، الضمان، المميزات).",
       price: "",
-      image: "images/medical-1.jpg"
+      image: "images/medical-1.webp"
     },
     {
       name: "مرتبة سوست — موديل تجريبي 1",
@@ -35,7 +35,7 @@ const CATALOG = {
       thickness: "25 سم",
       desc: "وصف قصير للمنتج هنا.",
       price: "",
-      image: "images/spring-1.jpg"
+      image: "images/spring-1.webp"
     },
     {
       name: "مرتبة سوفت — موديل تجريبي 1",
@@ -44,7 +44,7 @@ const CATALOG = {
       thickness: "15 سم",
       desc: "وصف قصير للمنتج هنا.",
       price: "",
-      image: "images/soft-1.jpg"
+      image: "images/soft-1.webp"
     },
     {
       name: "مخدة — موديل تجريبي 1",
@@ -53,7 +53,7 @@ const CATALOG = {
       thickness: "",
       desc: "وصف قصير للمنتج هنا.",
       price: "",
-      image: "images/pillow-1.jpg"
+      image: "images/pillow-1.webp"
     },
     {
       name: "كثرة — موديل تجريبي 1",
@@ -62,7 +62,7 @@ const CATALOG = {
       thickness: "5 سم",
       desc: "وصف قصير للمنتج هنا.",
       price: "",
-      image: "images/topper-1.jpg"
+      image: "images/topper-1.webp"
     },
     {
       name: "تجديد وإصلاح المراتب",
@@ -71,7 +71,7 @@ const CATALOG = {
       thickness: "",
       desc: "قسم صيانة متخصص لتجديد وإصلاح المراتب. ابعتلنا صورة المرتبة ونقولك التكلفة.",
       price: "",
-      image: "images/repair-1.jpg"
+      image: "images/repair-1.webp"
     }
   ]
 };
